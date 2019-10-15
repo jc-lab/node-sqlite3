@@ -1,3 +1,22 @@
+# Usage NEW
+
+```typescript
+import {sqlite3} from 'sqlite3' // @types/sqlite3
+import sqlite3JsBinder from 'node-sqlite3' // src/index.js
+
+let binder: sqlite3;
+
+export function getBinder(): sqlite3 {
+    if(!binder) {
+        let binary = require('node-sqlite3.node');
+        binder = sqlite3JsBinder(binary); // ***IMPORTANT***
+    }
+    return binder;
+}
+```
+
+---
+
 Asynchronous, non-blocking [SQLite3](https://sqlite.org/) bindings for [Node.js](http://nodejs.org/).
 
 [![NPM](https://nodei.co/npm/sqlite3.png?downloads=true&downloadRank=true)](https://nodei.co/npm/sqlite3/)
