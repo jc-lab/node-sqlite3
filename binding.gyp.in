@@ -1,0 +1,57 @@
+{
+  "includes": [ "@CMAKE_CURRENT_SOURCE_DIR@/deps/common-sqlite.gypi" ],
+  "variables": {
+      "sqlite%":"internal",
+      "sqlite_libname%":"sqlite3"
+  },
+  "targets": [
+    {
+      "target_name": "node-sqlite3",
+      "include_dirs": [
+        "@SQLITE_SRC_DIR@/include",
+        "@OPENSSL_INC_DIR@",
+        "<!(node -e \"require('nan')\")"
+      ],
+      "defines": [
+        "SQLITE_HAS_CODEC",
+        "SQLCIPHER_CRYPTO_OPENSSL"
+          "SQLITE_THREADSAFE=1",
+          "HAVE_USLEEP=1",
+          "SQLITE_ENABLE_FTS3",
+          "SQLITE_ENABLE_FTS4",
+          "SQLITE_ENABLE_FTS5",
+          "SQLITE_ENABLE_JSON1",
+          "SQLITE_ENABLE_RTREE"
+      ],
+      "conditions": [
+        [
+          "OS!='win'",
+          { "libraries+": [ "-L@OPENSSL_LIB_DIR@" ] }
+        ]
+      ],
+      "msvs_settings": {
+        "VCLinkerTool": {
+          "AdditionalLibraryDirectories": [
+            "@OPENSSL_LIB_DIR@"
+          ],
+          "AdditionalDependencies": [ "@LIBEAY_NAME@" ]
+        }
+      },
+      "cflags": [ "-include @BINDING_GCC_PREINCLUDE_FILE@" ],
+      "sources": [
+        @BINDING_GYP_SRC_LIST@
+      ]
+    },
+    {
+      "target_name": "copy_binary",
+      "type": "none",
+      "dependencies": [ "node-sqlite3" ],
+      "copies": [
+        {
+          "files": [ "<(PRODUCT_DIR)/node-sqlite3.node" ],
+          "destination": "@BINDING_OUT_DIR@"
+        }
+      ]
+    }
+  ]
+}
