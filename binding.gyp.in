@@ -6,22 +6,22 @@
   },
   "targets": [
     {
-      "target_name": "node-sqlite3",
+      "target_name": "sqlite3",
       "include_dirs": [
         "@SQLITE_SRC_DIR@/include",
         "@OPENSSL_INC_DIR@",
         "<!(node -e \"require('nan')\")"
       ],
       "defines": [
-        "SQLITE_HAS_CODEC",
-        "SQLCIPHER_CRYPTO_OPENSSL"
+          "SQLITE_HAS_CODEC=1",
+          "SQLCIPHER_CRYPTO_OPENSSL=1"
           "SQLITE_THREADSAFE=1",
           "HAVE_USLEEP=1",
-          "SQLITE_ENABLE_FTS3",
-          "SQLITE_ENABLE_FTS4",
-          "SQLITE_ENABLE_FTS5",
-          "SQLITE_ENABLE_JSON1",
-          "SQLITE_ENABLE_RTREE"
+          "SQLITE_ENABLE_FTS3=1",
+          "SQLITE_ENABLE_FTS4=1",
+          "SQLITE_ENABLE_FTS5=1",
+          "SQLITE_ENABLE_JSON1=1",
+          "SQLITE_ENABLE_RTREE=1"
       ],
       "conditions": [
         [
@@ -45,10 +45,10 @@
     {
       "target_name": "copy_binary",
       "type": "none",
-      "dependencies": [ "node-sqlite3" ],
+      "dependencies": [ "sqlite3" ],
       "copies": [
         {
-          "files": [ "<(PRODUCT_DIR)/node-sqlite3.node" ],
+          "files": [ "<(PRODUCT_DIR)/sqlite3.node" ],
           "destination": "@BINDING_OUT_DIR@"
         }
       ]

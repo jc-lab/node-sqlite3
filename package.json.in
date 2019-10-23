@@ -1,5 +1,5 @@
 {
-    "name": "node-sqlite3",
+    "name": "sqlite3",
     "description": "Asynchronous, non-blocking SQLite3 bindings",
     "version": "4.1.0",
     "homepage": "http://github.com/mapbox/node-sqlite3",
@@ -34,9 +34,9 @@
         "request": "^2.87.0"
     },
     "devDependencies": {
-        "cross-env": "^6.0.3",
-        "mocha": "2.x",
-        "node-gyp": "file:../../build_tools/node/node-gyp"
+      "cross-env": "^6.0.3",
+      "mocha": "2.x",
+      "node-gyp": "file:@PROJECT_ROOT@/build_tools/node/node-gyp"
     },
     "scripts": {
         "node_modules_postinstall": "md5sum package-lock.json > node_modules.md5",
