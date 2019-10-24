@@ -34,6 +34,7 @@
         "request": "^2.87.0"
     },
     "devDependencies": {
+      "@types/sqlite3": "^3.1.5",
       "cross-env": "^6.0.3",
       "mocha": "2.x",
       "node-gyp": "file:@PROJECT_ROOT@/build_tools/node/node-gyp"
@@ -51,5 +52,6 @@
         "sqlite3",
         "database"
     ],
-    "main": "./lib/sqlite3"
+    "main": "./lib/sqlite3.js",
+    "types": "./lib/sqlite3.d.ts"
 }
