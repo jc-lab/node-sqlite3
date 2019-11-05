@@ -29,6 +29,7 @@
           { "libraries+": [ "-L@OPENSSL_LIB_DIR@" ] }
         ]
       ],
+      "libraries+": [ "@OPENSSL_LIB_DIR@/@LIBEAY_NAME@" ],
       "msvs_settings": {
         "VCLinkerTool": {
           "AdditionalLibraryDirectories": [

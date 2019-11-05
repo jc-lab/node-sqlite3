@@ -12,7 +12,7 @@ else()
 	set(SQLITE_SRC_DIR "${CMAKE_SOURCE_DIR}/linux/sqlcipher")
 endif()
 
-set(BINDING_OUT_DIR "${BUILD_INSTALL_PACK_SECOND_BIN32_PATH}")
+set(BINDING_OUT_DIR "${INSTALL_BASE_OUT_BIN32_DIR}")
 
 file(GLOB_RECURSE SRC_FILES LIST_DIRECTORIES false
 	${SRC_PATH}/*.c*
@@ -56,7 +56,7 @@ add_custom_target(${PROJECT_NAME}-init
 
 if(TARGET_IS_DEBUG)
 	add_custom_command(
-		OUTPUT ${BUILD_INSTALL_PACK_SECOND_BIN32_PATH}/sqlite3.node
+		OUTPUT ${BINDING_OUT_DIR}/sqlite3.node
 		COMMAND call npm run node-gyp -- --arch=ia32 --target=${TARGET_ELECTRON_VERSION} --dist-url=https://electronjs.org/headers -j 4 --thin=yes configure
 		COMMAND call npm run node-gyp -- -j 4 --debug --arch=ia32 build
 		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
@@ -64,7 +64,7 @@ if(TARGET_IS_DEBUG)
 	)
 else()
 	add_custom_command(
-		OUTPUT ${BUILD_INSTALL_PACK_SECOND_BIN32_PATH}/sqlite3.node
+		OUTPUT ${BINDING_OUT_DIR}/sqlite3.node
 		COMMAND call npm run node-gyp -- --target=${TARGET_ELECTRON_VERSION} --dist-url=https://electronjs.org/headers -j 4 --thin=yes configure
 		COMMAND call npm run node-gyp -- -j 4 --release --arch=ia32 build
 		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
@@ -74,10 +74,8 @@ endif()
 
 add_custom_target(${PROJECT_NAME}
 	SOURCES ${SRC_FILES}
-	DEPENDS ${BUILD_INSTALL_PACK_SECOND_BIN32_PATH}/sqlite3.node
+	DEPENDS ${BINDING_OUT_DIR}/sqlite3.node
 )
-
-set_property(TARGET ${PROJECT_NAME} PROPERTY ZMANB_TARGET_FILE ${ZMANB_TARGET_FILE})
 
 #file(MAKE_DIRECTORY ${FRONT_TESTING_PATH})
 #configure_file(${CMAKE_CURRENT_SOURCE_DIR}/front/testing-env.js.in ${FRONT_TESTING_PATH}/testing-env.js)
