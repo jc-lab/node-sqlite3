@@ -33,7 +33,7 @@ list(APPEND sqlite3__other_srcs
         "${CMAKE_CURRENT_SOURCE_DIR}/src/threading.h")
 add_library(${PROJECT_NAME} MODULE ${SQLITE3_SOURCES} ${sqlite3__cxx_srcs} ${sqlite3__other_srcs})
 if(MSVC)
-    set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "/DELAYLOAD:node.dll")
+    set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "/DELAYLOAD:node.exe")
 endif()
 set_target_properties(${PROJECT_NAME} PROPERTIES EXCLUDE_FROM_ALL "FALSE")
 set_source_files_properties(${sqlite3__other_srcs} PROPERTIES HEADER_FILE_ONLY "TRUE")
