@@ -36,12 +36,9 @@
     "devDependencies": {
         "@types/sqlite3": "^3.1.5",
         "cross-env": "^6.0.3",
-        "mocha": "2.x",
-        "node-gyp": "file:../../build_tools/node/node-gyp"
+        "mocha": "2.x"
     },
     "scripts": {
-        "node_modules_postinstall": "md5sum package-lock.json > node_modules.md5",
-        "node-gyp": "./node_modules/.bin/node-gyp",
         "pretest": "node test/support/createdb.js",
         "test": "mocha -R spec --timeout 480000"
     },
